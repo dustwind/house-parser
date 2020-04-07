@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:HouseParser"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Name="FileNameTextBox" IsEnabled="False"></TextBox>
+            <Button Grid.Column="1" Width="70" Content="select xml" Name="XmlOpen" Click="XmlOpen_Click"></Button>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            
+        </StackPanel>
     </Grid>
 </Window>
