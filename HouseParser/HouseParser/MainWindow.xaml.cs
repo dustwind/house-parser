@@ -1,5 +1,9 @@
-﻿using System;
-using System.Configuration;
+﻿using HouseParser.Models;
+using HouseParser.Storage;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace HouseParser
@@ -7,14 +11,66 @@ namespace HouseParser
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public MainWindow()
+        private string filePath;
+
+        public string FilePath
         {
-            InitializeComponent();
+            get { return filePath; }
+            set
+            {
+                if (value != filePath)
+                {
+                    filePath = value;
+                    OnPropertyChanged("FilePath");
+                }
+            }
         }
 
-        private void XmlOpen_Click(object sender, RoutedEventArgs e)
+        public ObservableCollection<ApartmentStorageInfo> ApartmentStorageInfoList { get; set; }
+
+        private ApartmentStorageInfo currentApartmentStorageInfo;
+
+        public ApartmentStorageInfo CurrentApartmentStorageInfo
+        {
+            get { return currentApartmentStorageInfo; }
+            set
+            {
+                if (value != currentApartmentStorageInfo)
+                {
+                    currentApartmentStorageInfo = value;
+                    OnPropertyChanged("CurrentApartmentStorageInfo");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public MainWindow()
+        {
+            SetApartmentStorageProperties();
+
+            InitializeComponent();
+
+            DataContext = this;
+        }
+
+        private void SetApartmentStorageProperties()
+        {
+            ApartmentStorageInfoList = new ObservableCollection<ApartmentStorageInfo>();
+            foreach (ApartmentStorageEnum type in Enum.GetValues(typeof(ApartmentStorageEnum)))
+            {
+                ApartmentStorageInfoList.Add(new ApartmentStorageInfo(type));
+            }
+            CurrentApartmentStorageInfo = ApartmentStorageInfoList[0];
+        }
+
+        private void Xml_Open_Click(object sender, RoutedEventArgs e)
         {
             var openFileDlg = new Microsoft.Win32.OpenFileDialog();
             openFileDlg.Filter = "XML files (*.xml)|*.xml";
@@ -26,9 +82,19 @@ namespace HouseParser
             }
         }
 
+        private void Xml_Load_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DBSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            // Change storage
+        }
+
         private void SetFileNameTextBox(string fileName)
         {
-            FileNameTextBox.Text = fileName;
+            FilePath = fileName;
         }
     }
 }

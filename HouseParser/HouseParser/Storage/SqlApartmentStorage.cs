@@ -5,15 +5,15 @@ using System.Text;
 
 namespace HouseParser.Storage
 {
-    public class SqlExpressApartmentStorage : IApartmentStorage
+    public class SqlApartmentStorage : IApartmentStorage
     {
         protected string ConnectionString { get; set; }
 
-        public SqlExpressApartmentStorage()
+        public SqlApartmentStorage()
         {
         }
 
-        public SqlExpressApartmentStorage(string connectionString)
+        public SqlApartmentStorage(string connectionString)
         {
             this.ConnectionString = connectionString;
         }

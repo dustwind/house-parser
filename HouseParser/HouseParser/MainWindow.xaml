@@ -8,19 +8,27 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="20*"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Name="FileNameTextBox" IsEnabled="False"></TextBox>
-            <Button Grid.Column="1" Width="70" Content="select xml" Name="XmlOpen" Click="XmlOpen_Click"></Button>
+            <Button Grid.Column="0" Width="70" Content="select xml" Name="Xml_Open" Click="Xml_Open_Click" />
+            <TextBox Grid.Column="1" Name="FileNameTextBox" Text="{Binding Path=FilePath}" IsEnabled="False" />
+            <Button Grid.Column="2" Width="70" Content="load xml" Name="Xml_Load" Click="Xml_Load_Click" />
+            <ComboBox Grid.Column="3" Name="DBSelector"
+                      ItemsSource="{Binding Path=ApartmentStorageInfoList, Mode=TwoWay}"
+                      SelectedItem="{Binding Path=CurrentApartmentStorageInfo, Mode=TwoWay}"
+                      DisplayMemberPath="Type"
+                      SelectionChanged="DBSelector_SelectionChanged"/>
         </Grid>
         <StackPanel Grid.Row="1">
-            
+
         </StackPanel>
     </Grid>
 </Window>
