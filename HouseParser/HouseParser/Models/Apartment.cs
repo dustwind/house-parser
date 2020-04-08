@@ -2,8 +2,9 @@
 
 namespace HouseParser.Models
 {
-    public class Apartment
+    public class Apartment : IApartment
     {
+        public Guid Id { get; private set; }
         public string City { get; private set; }
 
         public double Area { get; private set; }
@@ -31,6 +32,7 @@ namespace HouseParser.Models
                 throw new ArgumentException("Price can not be negative.");
             }
 
+            Id = Guid.NewGuid();
             City = city;
             Floor = floor;
             Area = area;
