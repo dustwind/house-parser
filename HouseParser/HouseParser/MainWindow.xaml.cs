@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 
 namespace HouseParser
@@ -28,11 +29,11 @@ namespace HouseParser
             }
         }
 
-        public ObservableCollection<ApartmentStorageInfo> ApartmentStorageInfoList { get; set; }
+        public List<ApartmentStorageEnum> ApartmentStorageInfoList { get; set; }
 
-        private ApartmentStorageInfo currentApartmentStorageInfo;
+        private ApartmentStorageEnum currentApartmentStorageInfo;
 
-        public ApartmentStorageInfo CurrentApartmentStorageInfo
+        public ApartmentStorageEnum CurrentApartmentStorageInfo
         {
             get { return currentApartmentStorageInfo; }
             set
@@ -62,11 +63,9 @@ namespace HouseParser
 
         private void SetApartmentStorageProperties()
         {
-            ApartmentStorageInfoList = new ObservableCollection<ApartmentStorageInfo>();
-            foreach (ApartmentStorageEnum type in Enum.GetValues(typeof(ApartmentStorageEnum)))
-            {
-                ApartmentStorageInfoList.Add(new ApartmentStorageInfo(type));
-            }
+            //ApartmentStorageInfoList = new ObservableCollection<ApartmentStorageEnum>();
+            ApartmentStorageInfoList = Enum.GetValues(typeof(ApartmentStorageEnum)).Cast<ApartmentStorageEnum>().ToList();
+
             CurrentApartmentStorageInfo = ApartmentStorageInfoList[0];
         }
 

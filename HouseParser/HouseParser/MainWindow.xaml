@@ -24,7 +24,6 @@
             <ComboBox Grid.Column="3" Name="DBSelector"
                       ItemsSource="{Binding Path=ApartmentStorageInfoList, Mode=TwoWay}"
                       SelectedItem="{Binding Path=CurrentApartmentStorageInfo, Mode=TwoWay}"
-                      DisplayMemberPath="Type"
                       SelectionChanged="DBSelector_SelectionChanged"/>
         </Grid>
         <StackPanel Grid.Row="1">

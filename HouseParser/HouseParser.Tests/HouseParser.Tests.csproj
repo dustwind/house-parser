@@ -17,4 +17,8 @@
     <ProjectReference Include="..\HouseParser\HouseParser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Storage\Apartment\" />
+  </ItemGroup>
+
 </Project>
